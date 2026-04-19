@@ -1,152 +1,1019 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Strong Body Gym | Arraiján Panamá</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Strong Body Gym | La Chorrera, Panama</title>
+  <meta name="description" content="El mejor gimnasio en La Chorrera, Panama. Entrenamiento de fuerza, cardio, clases grupales y nutricion personalizada." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <style>
+    /* ==================== RESET ==================== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body { font-family: 'Inter', sans-serif; background: #0a0a0a; color: #f0f0f0; line-height: 1.6; overflow-x: hidden; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+    button { cursor: pointer; font-family: inherit; border: none; background: none; }
+    ul { list-style: none; }
 
-<style>
-body {
-    margin: 0;
-    font-family: Arial;
-    background: #0f0f0f;
-    color: white;
-}
+    /* ==================== VARIABLES ==================== */
+    :root {
+      --orange: #f97316;
+      --orange-dark: #ea6a00;
+      --black: #0a0a0a;
+      --dark: #111111;
+      --surface: #191919;
+      --surface2: #222222;
+      --border: #2c2c2c;
+      --text: #f0f0f0;
+      --muted: #888888;
+    }
 
-header {
-    text-align: center;
-    padding: 80px 20px;
-    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.7)),
-    url('https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e') center/cover;
-}
+    /* ==================== LAYOUT ==================== */
+    .container { max-width: 1180px; margin: 0 auto; padding: 0 24px; }
+    section { padding: 96px 0; }
 
-h1 { font-size: 38px; }
-p { font-size: 18px; }
+    /* ==================== TYPOGRAPHY ==================== */
+    .section-tag {
+      display: inline-block;
+      color: var(--orange);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 14px;
+    }
+    .section-title {
+      font-size: clamp(1.9rem, 4.5vw, 3rem);
+      font-weight: 900;
+      line-height: 1.08;
+      margin-bottom: 16px;
+    }
+    .section-sub {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+      max-width: 520px;
+    }
+    .orange { color: var(--orange); }
 
-.btn {
-    background: #ff3c00;
-    padding: 15px 25px;
-    margin: 10px;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    display: inline-block;
-    font-weight: bold;
-}
+    /* ==================== BUTTONS ==================== */
+    .btn {
+      display: inline-block;
+      padding: 13px 28px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      transition: all 0.2s ease;
+    }
+    .btn-primary { background: var(--orange); color: #fff; }
+    .btn-primary:hover { background: var(--orange-dark); transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: #fff; border: 1.5px solid rgba(255,255,255,0.35); }
+    .btn-outline:hover { border-color: var(--orange); color: var(--orange); transform: translateY(-2px); }
 
-.section {
-    padding: 60px 20px;
-    text-align: center;
-}
+    /* ==================== NAVBAR ==================== */
+    #navbar {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+      transition: background 0.3s, box-shadow 0.3s;
+    }
+    #navbar.scrolled {
+      background: rgba(10,10,10,0.96);
+      backdrop-filter: blur(14px);
+      box-shadow: 0 2px 24px rgba(0,0,0,0.6);
+    }
+    .nav-inner {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 68px; padding: 0 24px; max-width: 1180px; margin: 0 auto;
+    }
+    .nav-logo { font-size: 18px; font-weight: 900; letter-spacing: 1px; }
+    .nav-logo span { color: var(--orange); }
+    .nav-links { display: flex; align-items: center; gap: 4px; }
+    .nav-links a {
+      padding: 8px 14px; font-size: 13px; font-weight: 500;
+      color: var(--muted); border-radius: 6px; transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--orange); }
+    .nav-links .nav-cta {
+      padding: 10px 20px; background: var(--orange); color: #fff;
+      border-radius: 8px; font-weight: 700; margin-left: 8px;
+    }
+    .nav-links .nav-cta:hover { background: var(--orange-dark); color: #fff; }
+    .hamburger { display: none; flex-direction: column; gap: 5px; padding: 6px; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--text); border-radius: 2px; transition: all 0.3s; }
+    .mobile-menu {
+      display: none; flex-direction: column; gap: 4px;
+      background: rgba(10,10,10,0.98); backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border); padding: 12px 24px 20px;
+      position: fixed; top: 68px; left: 0; right: 0; z-index: 999;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      padding: 12px 14px; font-size: 15px; font-weight: 500;
+      color: var(--muted); border-radius: 8px; transition: color 0.2s, background 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--orange); background: var(--surface); }
+    .mobile-menu .m-cta {
+      margin-top: 8px; text-align: center; background: var(--orange);
+      color: #fff; padding: 13px; font-weight: 700; border-radius: 8px;
+    }
+    .mobile-menu .m-cta:hover { background: var(--orange-dark); color: #fff; }
 
-.cards {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-}
+    /* ==================== HERO ==================== */
+    #inicio {
+      min-height: 100vh; position: relative;
+      display: flex; align-items: center; justify-content: center;
+      text-align: center; overflow: hidden; padding-top: 68px;
+    }
+    .hero-bg {
+      position: absolute; inset: 0;
+      background:
+        linear-gradient(to bottom, rgba(10,10,10,0.78) 0%, rgba(10,10,10,0.55) 40%, rgba(10,10,10,0.92) 100%),
+        url('https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e') center/cover no-repeat;
+    }
+    .hero-content { position: relative; z-index: 1; padding: 60px 24px 40px; max-width: 860px; }
+    .hero-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(249,115,22,0.15); border: 1px solid rgba(249,115,22,0.3);
+      color: var(--orange); font-size: 11px; font-weight: 700;
+      letter-spacing: 3px; text-transform: uppercase;
+      padding: 7px 18px; border-radius: 999px; margin-bottom: 28px;
+    }
+    .hero-pill::before {
+      content: ''; width: 7px; height: 7px;
+      background: var(--orange); border-radius: 50%;
+      animation: blink 2s ease-in-out infinite;
+    }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.3} }
+    .hero-title { font-size: clamp(3rem, 9vw, 6.5rem); font-weight: 900; line-height: 1; margin-bottom: 24px; letter-spacing: -2px; }
+    .hero-desc { font-size: 17px; color: rgba(240,240,240,0.65); max-width: 560px; margin: 0 auto 40px; line-height: 1.7; }
+    .hero-desc strong { color: var(--text); }
+    .hero-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; margin-bottom: 64px; }
+    .hero-stats { display: flex; justify-content: center; gap: 48px; flex-wrap: wrap; }
+    .stat { text-align: center; }
+    .stat-num { font-size: 2.6rem; font-weight: 900; color: var(--orange); line-height: 1; }
+    .stat-label { font-size: 11px; color: var(--muted); margin-top: 5px; letter-spacing: 1px; text-transform: uppercase; }
+    .stat-divider { width: 1px; background: var(--border); align-self: stretch; }
 
-.card {
-    background: #1a1a1a;
-    margin: 15px;
-    padding: 20px;
-    border-radius: 10px;
-    width: 260px;
-}
+    /* ==================== HOURS STRIP ==================== */
+    .hours-strip { background: var(--surface); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); padding: 18px 24px; }
+    .hours-inner { display: flex; justify-content: center; align-items: center; gap: 40px; flex-wrap: wrap; max-width: 1180px; margin: 0 auto; }
+    .hour-item { text-align: center; }
+    .hour-day { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; }
+    .hour-time { font-size: 14px; font-weight: 700; margin-top: 3px; }
+    .hours-sep { width: 1px; height: 32px; background: var(--border); }
 
-.whatsapp {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    background: #25D366;
-    padding: 15px;
-    border-radius: 50px;
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-}
+    /* ==================== SERVICES ==================== */
+    #servicios { background: var(--dark); }
+    .services-header { text-align: center; margin-bottom: 56px; }
+    .services-header .section-sub { margin: 0 auto; }
+    .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .s-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 32px 24px;
+      position: relative; overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .s-card::after {
+      content: ''; position: absolute; bottom: 0; left: 0; right: 0;
+      height: 2px; background: var(--orange);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.3s ease;
+    }
+    .s-card:hover { border-color: rgba(249,115,22,0.35); transform: translateY(-4px); }
+    .s-card:hover::after { transform: scaleX(1); }
+    .s-icon {
+      width: 52px; height: 52px; border-radius: 12px;
+      background: rgba(249,115,22,0.12);
+      display: flex; align-items: center; justify-content: center; margin-bottom: 20px;
+    }
+    .s-icon svg { width: 24px; height: 24px; stroke: var(--orange); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .s-card h3 { font-size: 16px; font-weight: 800; margin-bottom: 10px; }
+    .s-card p { font-size: 13.5px; color: var(--muted); line-height: 1.65; }
 
-footer {
-    text-align: center;
-    padding: 30px;
-    background: #000;
-}
-</style>
+    /* ==================== SCHEDULE ==================== */
+    #horarios { background: var(--black); }
+    .schedule-hdr { margin-bottom: 40px; }
+    .tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 28px; }
+    .tab {
+      padding: 9px 20px; border-radius: 8px; font-size: 13px; font-weight: 600;
+      background: var(--surface); color: var(--muted);
+      border: 1px solid var(--border); cursor: pointer;
+      transition: all 0.2s;
+    }
+    .tab:hover { color: var(--orange); border-color: rgba(249,115,22,0.4); }
+    .tab.active { background: var(--orange); color: #fff; border-color: var(--orange); }
+    .tab-pane { display: none; }
+    .tab-pane.active { display: flex; flex-direction: column; gap: 10px; }
+    .class-row {
+      display: flex; align-items: center; gap: 20px;
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 10px; padding: 16px 22px;
+      transition: border-color 0.2s;
+    }
+    .class-row:hover { border-color: rgba(249,115,22,0.3); }
+    .class-time { font-size: 14px; font-weight: 700; color: var(--orange); min-width: 90px; }
+    .class-info { flex: 1; }
+    .class-name { font-size: 15px; font-weight: 700; }
+    .class-instructor { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .class-type {
+      font-size: 10px; font-weight: 700; letter-spacing: 1.5px;
+      text-transform: uppercase; padding: 3px 10px; border-radius: 999px;
+    }
+    .type-fuerza { background: rgba(249,115,22,0.15); color: var(--orange); }
+    .type-cardio { background: rgba(96,165,250,0.15); color: #60a5fa; }
+    .type-grupal { background: rgba(192,132,252,0.15); color: #c084fc; }
+
+    /* ==================== PRICING ==================== */
+    #planes { background: var(--dark); }
+    .pricing-header { text-align: center; margin-bottom: 56px; }
+    .pricing-header .section-sub { margin: 0 auto; }
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; align-items: start; }
+    .p-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 16px; padding: 36px 28px;
+      display: flex; flex-direction: column; gap: 22px;
+      transition: transform 0.3s;
+    }
+    .p-card:hover { transform: translateY(-4px); }
+    .p-card.featured {
+      border-color: var(--orange);
+      background: linear-gradient(160deg, var(--surface) 0%, rgba(249,115,22,0.06) 100%);
+      box-shadow: 0 20px 60px rgba(249,115,22,0.15);
+      transform: scale(1.03);
+    }
+    .p-card.featured:hover { transform: scale(1.03) translateY(-4px); }
+    .p-popular {
+      position: relative; text-align: center;
+      margin: -36px -28px 0; padding: 10px; margin-bottom: -10px;
+      background: var(--orange); color: #fff;
+      font-size: 11px; font-weight: 700; letter-spacing: 2px;
+      text-transform: uppercase; border-radius: 16px 16px 0 0;
+    }
+    .p-name { font-size: 12px; font-weight: 700; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; }
+    .p-price { display: flex; align-items: flex-start; gap: 2px; }
+    .p-dollar { font-size: 20px; font-weight: 700; color: var(--orange); margin-top: 8px; }
+    .p-amount { font-size: 52px; font-weight: 900; color: var(--orange); line-height: 1; }
+    .p-period { font-size: 13px; color: var(--muted); align-self: flex-end; margin-bottom: 6px; }
+    .p-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    .p-features { display: flex; flex-direction: column; gap: 11px; }
+    .p-feature { display: flex; align-items: center; gap: 10px; font-size: 13.5px; }
+    .p-check {
+      width: 20px; height: 20px; border-radius: 50%; flex-shrink: 0;
+      background: rgba(249,115,22,0.15); display: flex; align-items: center; justify-content: center;
+    }
+    .p-check svg { width: 11px; height: 11px; stroke: var(--orange); fill: none; stroke-width: 3; stroke-linecap: round; stroke-linejoin: round; }
+    .p-btn {
+      display: block; text-align: center; padding: 14px;
+      border-radius: 10px; font-size: 13px; font-weight: 700;
+      transition: all 0.2s; cursor: pointer;
+    }
+    .p-btn-primary { background: var(--orange); color: #fff; }
+    .p-btn-primary:hover { background: var(--orange-dark); }
+    .p-btn-outline { background: transparent; color: var(--text); border: 1.5px solid var(--border); }
+    .p-btn-outline:hover { border-color: var(--orange); color: var(--orange); }
+
+    /* ==================== GALLERY ==================== */
+    #galeria { background: var(--black); }
+    .gallery-header { text-align: center; margin-bottom: 48px; }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-template-rows: 200px 200px;
+      gap: 12px;
+    }
+    .g-item { overflow: hidden; border-radius: 10px; }
+    .g-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.5s ease; }
+    .g-item:hover img { transform: scale(1.07); }
+    .g-item:nth-child(1) { grid-column: 1 / 3; grid-row: 1 / 3; }
+    .g-item:nth-child(2) { grid-column: 3; grid-row: 1; }
+    .g-item:nth-child(3) { grid-column: 4; grid-row: 1; }
+    .g-item:nth-child(4) { grid-column: 3; grid-row: 2; }
+    .g-item:nth-child(5) { grid-column: 4; grid-row: 2; }
+
+    /* ==================== TESTIMONIALS ==================== */
+    #testimonios { background: var(--dark); }
+    .test-header { text-align: center; margin-bottom: 56px; }
+    .test-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .t-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 12px; padding: 28px 22px;
+      display: flex; flex-direction: column;
+    }
+    .t-stars { display: flex; gap: 3px; margin-bottom: 14px; }
+    .t-star { color: var(--orange); font-size: 14px; }
+    .t-text { font-size: 13.5px; color: var(--muted); line-height: 1.7; font-style: italic; flex: 1; margin-bottom: 20px; }
+    .t-author { display: flex; align-items: center; gap: 10px; }
+    .t-avatar {
+      width: 40px; height: 40px; border-radius: 50%; flex-shrink: 0;
+      background: var(--surface2); border: 2px solid rgba(249,115,22,0.3);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 14px; font-weight: 800; color: var(--orange);
+    }
+    .t-name { font-size: 13px; font-weight: 700; }
+    .t-role { font-size: 11px; color: var(--muted); margin-top: 1px; }
+
+    /* ==================== CONTACT ==================== */
+    #contacto { background: var(--black); }
+    .contact-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: start; }
+    .c-info { display: flex; flex-direction: column; gap: 28px; margin: 28px 0; }
+    .c-item { display: flex; gap: 16px; align-items: flex-start; }
+    .c-icon {
+      width: 46px; height: 46px; border-radius: 10px;
+      background: rgba(249,115,22,0.12); flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .c-icon svg { width: 20px; height: 20px; stroke: var(--orange); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .c-label { font-size: 10px; color: var(--muted); text-transform: uppercase; letter-spacing: 2px; margin-bottom: 3px; }
+    .c-val { font-size: 14px; font-weight: 600; line-height: 1.5; }
+    .map-box { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+    .map-box iframe { display: block; width: 100%; height: 220px; border: none; filter: invert(90%) hue-rotate(180deg); }
+    .c-form { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 36px; }
+    .c-form h3 { font-size: 22px; font-weight: 800; margin-bottom: 28px; }
+    .f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+    .f-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 14px; }
+    .f-label { font-size: 12px; font-weight: 600; color: var(--muted); letter-spacing: 0.5px; }
+    .f-input, .f-select, .f-textarea {
+      background: var(--surface2); border: 1px solid var(--border);
+      border-radius: 8px; padding: 11px 14px; font-size: 14px;
+      color: var(--text); font-family: inherit; outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .f-input::placeholder, .f-textarea::placeholder { color: var(--muted); }
+    .f-input:focus, .f-select:focus, .f-textarea:focus {
+      border-color: var(--orange); box-shadow: 0 0 0 3px rgba(249,115,22,0.12);
+    }
+    .f-select option { background: var(--surface2); }
+    .f-textarea { resize: vertical; min-height: 100px; }
+    .f-submit {
+      width: 100%; padding: 14px; background: var(--orange); color: #fff;
+      border: none; border-radius: 10px; font-size: 14px; font-weight: 700;
+      cursor: pointer; transition: background 0.2s, transform 0.15s;
+      font-family: inherit;
+    }
+    .f-submit:hover { background: var(--orange-dark); transform: scale(1.02); }
+    .f-success { display: none; text-align: center; padding: 40px 20px; }
+    .f-success.show { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+    .f-success-icon {
+      width: 60px; height: 60px; border-radius: 50%;
+      background: rgba(249,115,22,0.15);
+      display: flex; align-items: center; justify-content: center;
+    }
+    .f-success-icon svg { width: 28px; height: 28px; stroke: var(--orange); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+    /* ==================== FOOTER ==================== */
+    footer { background: var(--dark); border-top: 1px solid var(--border); padding: 64px 24px 0; }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 48px; max-width: 1180px; margin: 0 auto 48px; }
+    .f-brand p { font-size: 13.5px; color: var(--muted); line-height: 1.7; margin: 14px 0 22px; max-width: 260px; }
+    .f-socials { display: flex; gap: 10px; }
+    .f-social {
+      width: 38px; height: 38px; border-radius: 8px;
+      background: var(--surface2); border: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .f-social:hover { background: var(--orange); border-color: var(--orange); }
+    .f-social svg { width: 17px; height: 17px; stroke: var(--text); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+    .f-col h4 { font-size: 11px; font-weight: 700; color: var(--muted); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 20px; }
+    .f-col ul { display: flex; flex-direction: column; gap: 12px; }
+    .f-col ul li a { font-size: 13.5px; color: rgba(240,240,240,0.55); transition: color 0.2s; }
+    .f-col ul li a:hover { color: var(--orange); }
+    .footer-bottom {
+      border-top: 1px solid var(--border); padding: 20px 24px;
+      display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap;
+      gap: 10px; max-width: 1180px; margin: 0 auto;
+    }
+    .footer-bottom p { font-size: 12.5px; color: var(--muted); }
+    .footer-bottom span { color: var(--orange); }
+
+    /* ==================== WHATSAPP ==================== */
+    .wa-wrap {
+      position: fixed; bottom: 26px; right: 26px; z-index: 9999;
+      display: flex; flex-direction: column; align-items: flex-end; gap: 12px;
+    }
+    .wa-bubble {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: 14px; padding: 16px 40px 16px 18px;
+      max-width: 230px; position: relative;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+      animation: popUp 0.3s ease;
+      display: none;
+    }
+    .wa-bubble.show { display: block; }
+    @keyframes popUp { from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:translateY(0)} }
+    .wa-bubble::after {
+      content: ''; position: absolute; bottom: -7px; right: 18px;
+      width: 13px; height: 13px;
+      background: var(--surface); border-right: 1px solid var(--border); border-bottom: 1px solid var(--border);
+      transform: rotate(45deg);
+    }
+    .wa-bubble p { font-size: 13px; line-height: 1.55; color: var(--text); margin-bottom: 4px; }
+    .wa-bubble small { font-size: 11px; color: var(--muted); }
+    .wa-close {
+      position: absolute; top: 8px; right: 10px;
+      background: none; border: none; color: var(--muted);
+      font-size: 16px; line-height: 1; cursor: pointer; padding: 2px 4px;
+    }
+    .wa-close:hover { color: var(--text); }
+    .wa-btn {
+      width: 58px; height: 58px; border-radius: 50%;
+      background: #25d366; border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.45);
+      position: relative; transition: transform 0.2s;
+    }
+    .wa-btn:hover { transform: scale(1.1); }
+    .wa-btn svg { width: 31px; height: 31px; fill: #fff; }
+    .wa-ring {
+      position: absolute; inset: -6px; border-radius: 50%;
+      border: 2px solid rgba(37,211,102,0.45);
+      animation: ripple 2s ease-out infinite;
+    }
+    @keyframes ripple { 0%{transform:scale(0.88);opacity:1} 100%{transform:scale(1.6);opacity:0} }
+    .wa-badge {
+      position: absolute; top: -4px; right: -4px;
+      background: var(--orange); color: #fff;
+      font-size: 9px; font-weight: 800; letter-spacing: 0.5px;
+      padding: 2px 7px; border-radius: 999px;
+      white-space: nowrap; font-family: inherit;
+    }
+
+    /* ==================== RESPONSIVE ==================== */
+    @media (max-width: 900px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .pricing-grid { grid-template-columns: 1fr; }
+      .p-card.featured { transform: none; }
+      .p-card.featured:hover { transform: translateY(-4px); }
+      .test-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); grid-template-rows: auto; }
+      .g-item:nth-child(1) { grid-column: 1 / 3; grid-row: auto; }
+      .g-item:nth-child(n) { grid-column: auto; grid-row: auto; }
+      .contact-wrap { grid-template-columns: 1fr; gap: 40px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+    @media (max-width: 600px) {
+      section { padding: 72px 0; }
+      .hero-title { letter-spacing: -1px; }
+      .hero-stats { gap: 28px; }
+      .stat-divider { display: none; }
+      .services-grid { grid-template-columns: 1fr; }
+      .test-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: 1fr; }
+      .g-item { aspect-ratio: 4/3; }
+      .g-item:nth-child(n) { grid-column: auto; grid-row: auto; }
+      .f-row { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+      .hero-btns { flex-direction: column; align-items: center; }
+      .hours-sep { display: none; }
+      .hours-inner { gap: 20px; }
+    }
+  </style>
 </head>
-
 <body>
 
-<header>
-    <h1>🔥 TRANSFORMA TU CUERPO EN 90 DÍAS</h1>
-    <p>Entrena en Strong Body Gym con coaches expertos y resultados reales</p>
+<!-- ========== NAVBAR ========== -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#inicio" class="nav-logo">STRONG <span>BODY</span> GYM</a>
+    <ul class="nav-links">
+      <li><a href="#servicios">Servicios</a></li>
+      <li><a href="#horarios">Horarios</a></li>
+      <li><a href="#planes">Planes</a></li>
+      <li><a href="#galeria">Galeria</a></li>
+      <li><a href="#testimonios">Testimonios</a></li>
+      <li><a href="#contacto" class="nav-cta">Unirme</a></li>
+    </ul>
+    <button class="hamburger" id="menuBtn" aria-label="Abrir menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
 
-    <a href="https://wa.me/50769369139" class="btn">🔥 PRUEBA GRATIS</a>
-    <a href="https://wa.me/50769369139" class="btn">💬 WHATSAPP</a>
-</header>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#servicios" onclick="closeMenu()">Servicios</a>
+  <a href="#horarios" onclick="closeMenu()">Horarios</a>
+  <a href="#planes" onclick="closeMenu()">Planes</a>
+  <a href="#galeria" onclick="closeMenu()">Galeria</a>
+  <a href="#testimonios" onclick="closeMenu()">Testimonios</a>
+  <a href="#contacto" class="m-cta" onclick="closeMenu()">Unirme Ahora</a>
+</div>
 
-<section class="section">
-    <h2>¿POR QUÉ ELEGIRNOS?</h2>
-    <div class="cards">
-        <div class="card">💪 Entrenadores certificados</div>
-        <div class="card">🔥 Resultados comprobados</div>
-        <div class="card">🏋️ Equipos completos</div>
-        <div class="card">⚡ Ambiente motivador</div>
+<!-- ========== HERO ========== -->
+<section id="inicio">
+  <div class="hero-bg"></div>
+  <div class="hero-content">
+    <div class="hero-pill">La Chorrera, Panama</div>
+    <h1 class="hero-title">FORJA TU<br><span class="orange">CUERPO.</span><br>DEFINE TU<br>LIMITE.</h1>
+    <p class="hero-desc">Strong Body Gym es donde la transformacion ocurre. Equipos de alto nivel, <strong>instructores certificados</strong> y una comunidad que te impulsa cada dia.</p>
+    <div class="hero-btns">
+      <a href="#planes" class="btn btn-primary">Ver Planes</a>
+      <a href="#contacto" class="btn btn-outline">Contactanos</a>
     </div>
-</section>
-
-<section class="section">
-    <h2>🔥 PROMOCIONES</h2>
-    <div class="cards">
-        <div class="card">
-            <h3>3 Meses</h3>
-            <p>$50</p>
-        </div>
-        <div class="card">
-            <h3>4 Meses</h3>
-            <p>$70</p>
-        </div>
-        <div class="card">
-            <h3>6 Meses</h3>
-            <p>$130</p>
-        </div>
-        <div class="card">
-            <h3>12 Meses</h3>
-            <p>$240</p>
-        </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="stat-num">500+</div><div class="stat-label">Miembros activos</div></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><div class="stat-num">8+</div><div class="stat-label">Anos de experiencia</div></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><div class="stat-num">15+</div><div class="stat-label">Clases semanales</div></div>
+      <div class="stat-divider"></div>
+      <div class="stat"><div class="stat-num">10</div><div class="stat-label">Instructores</div></div>
     </div>
+  </div>
 </section>
 
-<section class="section">
-    <h2>RESULTADOS REALES</h2>
-    <p>⭐ "Excelente ambiente y atención"</p>
-    <p>⭐ "Equipos completos y entrenadores profesionales"</p>
-    <p>⭐ "Resultados visibles en pocas semanas"</p>
+<!-- ========== HOURS STRIP ========== -->
+<div class="hours-strip">
+  <div class="hours-inner">
+    <div class="hour-item"><div class="hour-day">Lunes - Viernes</div><div class="hour-time">5:00 AM - 10:00 PM</div></div>
+    <div class="hours-sep"></div>
+    <div class="hour-item"><div class="hour-day">Sabado</div><div class="hour-time">6:00 AM - 8:00 PM</div></div>
+    <div class="hours-sep"></div>
+    <div class="hour-item"><div class="hour-day">Domingo</div><div class="hour-time">7:00 AM - 2:00 PM</div></div>
+  </div>
+</div>
+
+<!-- ========== SERVICES ========== -->
+<section id="servicios">
+  <div class="container">
+    <div class="services-header">
+      <div class="section-tag">Lo que ofrecemos</div>
+      <h2 class="section-title">SERVICIOS <span class="orange">PREMIUM</span></h2>
+      <p class="section-sub">Todo lo que necesitas para alcanzar tus metas en un solo lugar, con la mejor tecnologia y profesionales certificados.</p>
+    </div>
+    <div class="services-grid">
+
+      <div class="s-card">
+        <div class="s-icon">
+          <svg viewBox="0 0 24 24"><path d="M6 4v16M18 4v16M6 12h12M3 6h3M18 6h3M3 18h3M18 18h3"/></svg>
+        </div>
+        <h3>Entrenamiento de Pesas</h3>
+        <p>Zona equipada con barras olimpicas, mancuernas hasta 50kg y maquinas de resistencia para ganar fuerza y musculo.</p>
+      </div>
+
+      <div class="s-card">
+        <div class="s-icon">
+          <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+        </div>
+        <h3>Zona Cardio</h3>
+        <p>Cintas, bicicletas estaticas, elipticas y remos de ultima generacion para mejorar tu resistencia y quemar calorias.</p>
+      </div>
+
+      <div class="s-card">
+        <div class="s-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Clases Grupales</h3>
+        <p>Zumba, Spinning, HIIT, Box Fit y mas. Instructores apasionados que te motivaran cada sesion.</p>
+      </div>
+
+      <div class="s-card">
+        <div class="s-icon">
+          <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        </div>
+        <h3>Entrenador Personal</h3>
+        <p>Sesiones uno a uno con entrenadores certificados que disenan programas personalizados segun tus objetivos.</p>
+      </div>
+
+      <div class="s-card">
+        <div class="s-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 2a5 5 0 1 0 0 10A5 5 0 0 0 12 2zM6 21v-1a6 6 0 0 1 12 0v1"/><path d="M19 9l2 2-6 6-3-3 1-1"/></svg>
+        </div>
+        <h3>Nutricion y Dieta</h3>
+        <p>Asesoria nutricional de especialistas que complementan tu entrenamiento con planes alimenticios efectivos.</p>
+      </div>
+
+      <div class="s-card">
+        <div class="s-icon">
+          <svg viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <h3>Evaluacion Fisica</h3>
+        <p>Medicion de composicion corporal y seguimiento mensual para visualizar tu progreso y ajustar tu programa.</p>
+      </div>
+
+    </div>
+  </div>
 </section>
 
-<section class="section">
-    <h2>📍 UBICACIÓN</h2>
-    <p>Vía Juan Demóstenes Arosemena, Arraiján</p>
-    <iframe 
-        src="https://www.google.com/maps?q=arraijan+panama&output=embed"
-        width="90%" height="300" style="border:0;">
-    </iframe>
+<!-- ========== SCHEDULE ========== -->
+<section id="horarios">
+  <div class="container">
+    <div class="schedule-hdr">
+      <div class="section-tag">Planifica tu semana</div>
+      <h2 class="section-title">HORARIO DE <span class="orange">CLASES</span></h2>
+    </div>
+    <div class="tabs">
+      <button class="tab active" onclick="showTab('lunes',this)">Lunes</button>
+      <button class="tab" onclick="showTab('martes',this)">Martes</button>
+      <button class="tab" onclick="showTab('miercoles',this)">Miercoles</button>
+      <button class="tab" onclick="showTab('jueves',this)">Jueves</button>
+      <button class="tab" onclick="showTab('viernes',this)">Viernes</button>
+      <button class="tab" onclick="showTab('sabado',this)">Sabado</button>
+      <button class="tab" onclick="showTab('domingo',this)">Domingo</button>
+    </div>
+
+    <div id="lunes" class="tab-pane active">
+      <div class="class-row"><span class="class-time">6:00 AM</span><div class="class-info"><div class="class-name">Body Pump</div><div class="class-instructor">Carlos Mendez</div></div><span class="class-type type-fuerza">Fuerza</span></div>
+      <div class="class-row"><span class="class-time">8:00 AM</span><div class="class-info"><div class="class-name">Spinning</div><div class="class-instructor">Maria Lopez</div></div><span class="class-type type-cardio">Cardio</span></div>
+      <div class="class-row"><span class="class-time">10:00 AM</span><div class="class-info"><div class="class-name">Zumba</div><div class="class-instructor">Ana Torres</div></div><span class="class-type type-grupal">Grupal</span></div>
+      <div class="class-row"><span class="class-time">5:00 PM</span><div class="class-info"><div class="class-name">HIIT Express</div><div class="class-instructor">Roberto Diaz</div></div><span class="class-type type-cardio">Cardio</span></div>
+      <div class="class-row"><span class="class-time">7:00 PM</span><div class="class-info"><div class="class-name">Box Fit</div><div class="class-instructor">Luis Perez</div></div><span class="class-type type-fuerza">Fuerza</span></div>
+    </div>
+
+    <div id="martes" class="tab-pane">
+      <div class="class-row"><span class="class-time">6:00 AM</span><div class="class-info"><div class="class-name">Yoga Power</div><div class="class-instructor">Sandra Ruiz</div></div><span class="class-type type-grupal">Grupal</span></div>
+      <div class="class-row"><span class="class-time">9:00 AM</span><div class="class-info"><div class="class-name">Cardio Mix</div><div class="class-instructor">Maria Lopez</div></div><span class="class-type type-cardio">Cardio</span></div>
+      <div class="class-row"><span class="class-time">5:30 PM</span><div class="class-info"><div class="class-name">Spinning Intenso</div><div class="class-instructor">Carlos Mendez</div></div><span class="class-type type-cardio">Cardio</span></div>
+      <div class="class-row"><span class="class-time">7:00 PM</span><div class="class-info"><div class="class-name">Funcional Total</div><div class="class-instructor">Roberto Diaz</div></div><span class="class-type type-fuerza">Fuerza</span></div>
+    </div>
+
+    <div id="miercoles" class="tab-pane">
+      <div class="class-row"><span class="class-time">6:00 AM</span><div class="class-info"><div class="class-name">Body Pump</div><div class="class-instructor">Carlos Mendez</div></div><span class="class-type type-fuerza">Fuerza</span></div>
+      <div class="class-row"><span class="class-time">8:00 AM</span><div class="class-info"><div class="class-name">Zumba</div><div class="class-instructor">Ana Torres</div></div><span class="class-type type-grupal">Grupal</span></div>
+      <div class="class-row"><span class="class-time">6:00 PM</span><div class="class-info"><div class="class-name">HIIT Express</div><div class="class-instructor">Luis Perez</div></div><span class="class-type type-cardio">Cardio</span></div>
+      <div class="class-row"><span class="class-time">7:30 PM</span><div class="class-info"><div class="class-name">Spinning</div><div class="class-instructor">Maria Lopez</div></div><span class="class-type type-cardio">Cardio</span></div>
+    </div>
+
+    <div id="jueves" class="tab-pane">
+      <div class="class-row"><span class="class-time">6:00 AM</span><div class="class-info"><div class="class-name">Box Fit</div><div class="class-instructor">Luis Perez</div></div><span class="class-type type-fuerza">Fuerza</span></div>
+      <div class="class-row"><span class="class-time">9:00 AM</span><div class="class-info"><div class="class-name">Yoga Power</div><div class="class-instructor">Sandra Ruiz</div></div><span class="class-type type-grupal">Grupal</span></div>
+      <div class="class-row"><span class="class-time">5:00 PM</span><div class="class-info"><div class="class-name">Funcional Total</div><div class="class-instructor">Roberto Diaz</div></div><span class="class-type type-fuerza">Fuerza</span></div>
+      <div class="class-row"><span class="class-time">7:00 PM</span><div class="class-info"><div class="class-name">Cardio Mix</div><div class="class-instructor">Maria Lopez</div></div><span class="class-type type-cardio">Cardio</span></div>
+    </div>
+
+    <div id="viernes" class="tab-pane">
+      <div class="class-row"><span class="class-time">6:00 AM</span><div class="class-info"><div class="class-name">Body Pump</div><div class="class-instructor">Carlos Mendez</div></div><span class="class-type type-fuerza">Fuerza</span></div>
+      <div class="class-row"><span class="class-time">8:00 AM</span><div class="class-info"><div class="class-name">Spinning</div><div class="class-instructor">Maria Lopez</div></div><span class="class-type type-cardio">Cardio</span></div>
+      <div class="class-row"><span class="class-time">10:00 AM</span><div class="class-info"><div class="class-name">Zumba</div><div class="class-instructor">Ana Torres</div></div><span class="class-type type-grupal">Grupal</span></div>
+      <div class="class-row"><span class="class-time">5:30 PM</span><div class="class-info"><div class="class-name">HIIT Express</div><div class="class-instructor">Roberto Diaz</div></div><span class="class-type type-cardio">Cardio</span></div>
+      <div class="class-row"><span class="class-time">7:30 PM</span><div class="class-info"><div class="class-name">Box Fit</div><div class="class-instructor">Luis Perez</div></div><span class="class-type type-fuerza">Fuerza</span></div>
+    </div>
+
+    <div id="sabado" class="tab-pane">
+      <div class="class-row"><span class="class-time">7:00 AM</span><div class="class-info"><div class="class-name">Spinning Intenso</div><div class="class-instructor">Carlos Mendez</div></div><span class="class-type type-cardio">Cardio</span></div>
+      <div class="class-row"><span class="class-time">9:00 AM</span><div class="class-info"><div class="class-name">Zumba</div><div class="class-instructor">Ana Torres</div></div><span class="class-type type-grupal">Grupal</span></div>
+      <div class="class-row"><span class="class-time">11:00 AM</span><div class="class-info"><div class="class-name">Funcional Total</div><div class="class-instructor">Roberto Diaz</div></div><span class="class-type type-fuerza">Fuerza</span></div>
+    </div>
+
+    <div id="domingo" class="tab-pane">
+      <div class="class-row"><span class="class-time">8:00 AM</span><div class="class-info"><div class="class-name">Yoga Power</div><div class="class-instructor">Sandra Ruiz</div></div><span class="class-type type-grupal">Grupal</span></div>
+      <div class="class-row"><span class="class-time">10:00 AM</span><div class="class-info"><div class="class-name">Cardio Mix</div><div class="class-instructor">Maria Lopez</div></div><span class="class-type type-cardio">Cardio</span></div>
+    </div>
+  </div>
 </section>
 
-<section class="section">
-    <h2>🕒 HORARIOS</h2>
-    <p>Lunes a Viernes: 6:30am - 10:00pm</p>
-    <p>Sábados: 8:00am - 12:00pm</p>
+<!-- ========== PRICING ========== -->
+<section id="planes">
+  <div class="container">
+    <div class="pricing-header">
+      <div class="section-tag">Membresias</div>
+      <h2 class="section-title">ELIGE TU <span class="orange">PLAN</span></h2>
+      <p class="section-sub">Sin contratos forzosos. Escoge el plan que mejor se adapte a tu estilo de vida y objetivos.</p>
+    </div>
+    <div class="pricing-grid">
+
+      <!-- Basico -->
+      <div class="p-card">
+        <div>
+          <div class="p-name">Basico</div>
+          <div class="p-price"><span class="p-dollar">$</span><span class="p-amount">35</span><span class="p-period">/mes</span></div>
+          <div class="p-desc">Ideal para quienes estan comenzando su viaje fitness.</div>
+        </div>
+        <ul class="p-features">
+          <li class="p-feature"><div class="p-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Acceso a sala de pesas</li>
+          <li class="p-feature"><div class="p-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Zona de cardio</li>
+          <li class="p-feature"><div class="p-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Vestuarios y duchas</li>
+          <li class="p-feature"><div class="p-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>2 clases grupales / semana</li>
+        </ul>
+        <button class="p-btn p-btn-outline" onclick="chatWhatsApp('Plan Basico $35')">Empezar Ahora</button>
+      </div>
+
+      <!-- Pro (featured) -->
+      <div class="p-card featured">
+        <div class="p-popular">Mas Popular</div>
+        <div>
+          <div class="p-name">Pro</div>
+          <div class="p-price"><span class="p-dollar">$</span><span class="p-amount">55</span><span class="p-period">/mes</span></div>
+          <div class="p-desc">El favorito de nuestra comunidad. Maximo rendimiento, minima inversion.</div>
+        </div>
+        <ul class="p-features">
+          <li class="p-feature"><div class="p-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Todo lo del plan Basico</li>
+          <li class="p-feature"><div class="p-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Clases grupales ilimitadas</li>
+          <li class="p-feature"><div class="p-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>2 sesiones con entrenador</li>
+          <li class="p-feature"><div class="p-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Evaluacion fisica mensual</li>
+          <li class="p-feature"><div class="p-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Plan nutricional basico</li>
+        </ul>
+        <button class="p-btn p-btn-primary" onclick="chatWhatsApp('Plan Pro $55')">Empezar Ahora</button>
+      </div>
+
+      <!-- Elite -->
+      <div class="p-card">
+        <div>
+          <div class="p-name">Elite</div>
+          <div class="p-price"><span class="p-dollar">$</span><span class="p-amount">90</span><span class="p-period">/mes</span></div>
+          <div class="p-desc">La experiencia completa para atletas comprometidos con resultados.</div>
+        </div>
+        <ul class="p-features">
+          <li class="p-feature"><div class="p-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Todo lo del plan Pro</li>
+          <li class="p-feature"><div class="p-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Entrenador personal dedicado</li>
+          <li class="p-feature"><div class="p-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Nutricion personalizada</li>
+          <li class="p-feature"><div class="p-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Acceso 24/7</li>
+          <li class="p-feature"><div class="p-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Seguimiento semanal</li>
+          <li class="p-feature"><div class="p-check"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>Descuentos en suplementos</li>
+        </ul>
+        <button class="p-btn p-btn-outline" onclick="chatWhatsApp('Plan Elite $90')">Empezar Ahora</button>
+      </div>
+
+    </div>
+  </div>
 </section>
 
-<section class="section">
-    <h2>🚀 EMPIEZA HOY</h2>
-    <a href="https://wa.me/50769369139" class="btn">💬 ESCRÍBENOS AHORA</a>
+<!-- ========== GALLERY ========== -->
+<section id="galeria">
+  <div class="container">
+    <div class="gallery-header">
+      <div class="section-tag">Nuestras instalaciones</div>
+      <h2 class="section-title">CONOCE EL <span class="orange">GYM</span></h2>
+    </div>
+    <div class="gallery-grid">
+      <div class="g-item">
+        <img src="https://placehold.co/800x600?text=Professional+gym+floor+squat+racks+barbells+weight+plates+dramatic+lighting" alt="Sala principal con racks de sentadillas e iluminacion dramatica" />
+      </div>
+      <div class="g-item">
+        <img src="https://placehold.co/400x300?text=Modern+cardio+area+treadmills+bikes+dark+gym" alt="Zona de cardio con cintas y bicicletas modernas" />
+      </div>
+      <div class="g-item">
+        <img src="https://placehold.co/400x300?text=Group+fitness+class+mirrored+studio+energetic" alt="Clase grupal en studio con espejos" />
+      </div>
+      <div class="g-item">
+        <img src="https://placehold.co/400x300?text=Chrome+dumbbell+rack+organized+modern+gym" alt="Rack de mancuernas cromadas organizadas" />
+      </div>
+      <div class="g-item">
+        <img src="https://placehold.co/400x300?text=Personal+training+session+coach+client+gym" alt="Sesion de entrenamiento personal con instructor" />
+      </div>
+    </div>
+  </div>
 </section>
 
-<a href="https://wa.me/50769369139" class="whatsapp">💬</a>
+<!-- ========== TESTIMONIALS ========== -->
+<section id="testimonios">
+  <div class="container">
+    <div class="test-header">
+      <div class="section-tag">Lo que dicen nuestros miembros</div>
+      <h2 class="section-title">RESULTADOS <span class="orange">REALES</span></h2>
+    </div>
+    <div class="test-grid">
 
+      <div class="t-card">
+        <div class="t-stars"><span class="t-star">&#9733;</span><span class="t-star">&#9733;</span><span class="t-star">&#9733;</span><span class="t-star">&#9733;</span><span class="t-star">&#9733;</span></div>
+        <p class="t-text">"Llevo 8 meses en Strong Body Gym y la transformacion ha sido increible. Los instructores son muy profesionales y el ambiente te motiva a dar el 100% cada dia."</p>
+        <div class="t-author"><div class="t-avatar">JR</div><div><div class="t-name">Jorge Ramos</div><div class="t-role">Miembro desde 2023</div></div></div>
+      </div>
+
+      <div class="t-card">
+        <div class="t-stars"><span class="t-star">&#9733;</span><span class="t-star">&#9733;</span><span class="t-star">&#9733;</span><span class="t-star">&#9733;</span><span class="t-star">&#9733;</span></div>
+        <p class="t-text">"Las clases de Zumba son increibles! Ana Torres es una instructora excelente. Perdi 12 kilos en 4 meses y me siento con mas energia que nunca."</p>
+        <div class="t-author"><div class="t-avatar">MC</div><div><div class="t-name">Maria Castillo</div><div class="t-role">Miembro desde 2022</div></div></div>
+      </div>
+
+      <div class="t-card">
+        <div class="t-stars"><span class="t-star">&#9733;</span><span class="t-star">&#9733;</span><span class="t-star">&#9733;</span><span class="t-star">&#9733;</span><span class="t-star">&#9733;</span></div>
+        <p class="t-text">"El plan Elite vale cada centavo. Mi entrenador personal diseno un programa completo y junto con el plan nutricional logre resultados que no creia posibles."</p>
+        <div class="t-author"><div class="t-avatar">AP</div><div><div class="t-name">Andres Pino</div><div class="t-role">Miembro Elite</div></div></div>
+      </div>
+
+      <div class="t-card">
+        <div class="t-stars"><span class="t-star">&#9733;</span><span class="t-star">&#9733;</span><span class="t-star">&#9733;</span><span class="t-star">&#9733;</span><span class="t-star">&#9733;</span></div>
+        <p class="t-text">"El mejor gimnasio de La Chorrera sin duda. Equipos de primera, siempre limpios y organizados. La comunidad es muy unida y eso hace la diferencia."</p>
+        <div class="t-author"><div class="t-avatar">LV</div><div><div class="t-name">Laura Vargas</div><div class="t-role">Miembro desde 2024</div></div></div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== CONTACT ========== -->
+<section id="contacto">
+  <div class="container">
+    <div class="contact-wrap">
+
+      <!-- Info -->
+      <div>
+        <div class="section-tag">Ponte en contacto</div>
+        <h2 class="section-title">VISITA <span class="orange">NUESTRO GYM</span></h2>
+        <div class="c-info">
+          <div class="c-item">
+            <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg></div>
+            <div><div class="c-label">Ubicacion</div><div class="c-val">La Chorrera, Panama</div></div>
+          </div>
+          <div class="c-item">
+            <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.18h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.73a16 16 0 0 0 5.32 5.32l1.62-1.88a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+            <div><div class="c-label">WhatsApp / Telefono</div><div class="c-val">+507 6999-9999</div></div>
+          </div>
+          <div class="c-item">
+            <div class="c-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+            <div><div class="c-label">Correo</div><div class="c-val">info@strongbodygym.pa</div></div>
+          </div>
+          <div class="c-item">
+            <div class="c-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg></div>
+            <div><div class="c-label">Horarios</div><div class="c-val">Lun-Vie: 5AM-10PM<br>Sab: 6AM-8PM &bull; Dom: 7AM-2PM</div></div>
+          </div>
+        </div>
+        <div class="map-box">
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d490.12!2d-79.6546045!3d8.9541603!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8faca3fe67efffff%3A0x89ea8d64ad294f36!2sStrong%20Body%20Gym!5e0!3m2!1ses!2spa!4v1713469200000"
+            allowfullscreen
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            title="Mapa Strong Body Gym La Chorrera Panama">
+          </iframe>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div>
+        <div class="c-form" id="formWrap">
+          <h3>Consulta <span class="orange">Gratis</span></h3>
+          <form id="contactForm" onsubmit="submitForm(event)">
+            <div class="f-row">
+              <div class="f-group"><label class="f-label">Nombre</label><input class="f-input" type="text" placeholder="Tu nombre" required /></div>
+              <div class="f-group"><label class="f-label">Apellido</label><input class="f-input" type="text" placeholder="Tu apellido" required /></div>
+            </div>
+            <div class="f-group"><label class="f-label">WhatsApp / Telefono</label><input class="f-input" type="tel" placeholder="+507 6000-0000" required /></div>
+            <div class="f-group"><label class="f-label">Correo electronico</label><input class="f-input" type="email" placeholder="tucorreo@email.com" /></div>
+            <div class="f-group">
+              <label class="f-label">Plan de interes</label>
+              <select class="f-select">
+                <option value="">Selecciona un plan</option>
+                <option>Plan Basico - $35/mes</option>
+                <option>Plan Pro - $55/mes</option>
+                <option>Plan Elite - $90/mes</option>
+                <option>Entrenador Personal</option>
+                <option>Solo informacion</option>
+              </select>
+            </div>
+            <div class="f-group"><label class="f-label">Mensaje</label><textarea class="f-textarea" placeholder="Cuentanos tu objetivo o cualquier consulta..."></textarea></div>
+            <button type="submit" class="f-submit">Enviar Consulta</button>
+          </form>
+          <div class="f-success" id="formSuccess">
+            <div class="f-success-icon"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <div style="font-size:20px;font-weight:800;">Mensaje enviado!</div>
+            <div style="color:var(--muted);font-size:14px;text-align:center;">Te contactaremos pronto por WhatsApp. Gracias por tu interes en Strong Body Gym.</div>
+            <button onclick="resetForm()" style="margin-top:8px;padding:10px 24px;background:var(--orange);color:#fff;border:none;border-radius:8px;font-size:14px;font-weight:700;cursor:pointer;font-family:inherit;">Enviar otro mensaje</button>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ========== FOOTER ========== -->
 <footer>
-    <p>© 2026 Strong Body Gym - Panamá</p>
+  <div class="footer-grid">
+    <div class="f-brand">
+      <div class="nav-logo" style="font-size:17px;">STRONG <span>BODY</span> GYM</div>
+      <p>Tu transformacion comienza aqui. El gimnasio mas completo de La Chorrera, Panama, con equipos de primera e instructores certificados.</p>
+      <div class="f-socials">
+        <a href="#" class="f-social" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+        </a>
+        <a href="#" class="f-social" aria-label="Facebook">
+          <svg viewBox="0 0 24 24"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+        </a>
+        <a href="https://wa.me/50769999999" class="f-social" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" stroke="none" fill="currentColor"/></svg>
+        </a>
+      </div>
+    </div>
+
+    <div class="f-col">
+      <h4>Navegacion</h4>
+      <ul>
+        <li><a href="#inicio">Inicio</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#horarios">Horarios</a></li>
+        <li><a href="#planes">Planes</a></li>
+        <li><a href="#galeria">Galeria</a></li>
+        <li><a href="#testimonios">Testimonios</a></li>
+      </ul>
+    </div>
+
+    <div class="f-col">
+      <h4>Servicios</h4>
+      <ul>
+        <li><a href="#servicios">Sala de Pesas</a></li>
+        <li><a href="#servicios">Zona Cardio</a></li>
+        <li><a href="#servicios">Clases Grupales</a></li>
+        <li><a href="#servicios">Entrenador Personal</a></li>
+        <li><a href="#servicios">Nutricion</a></li>
+        <li><a href="#servicios">Evaluacion Fisica</a></li>
+      </ul>
+    </div>
+
+    <div class="f-col">
+      <h4>Contacto</h4>
+      <ul>
+        <li><a href="#">La Chorrera, Panama</a></li>
+        <li><a href="https://wa.me/50769999999">+507 6999-9999</a></li>
+        <li><a href="mailto:info@strongbodygym.pa">info@strongbodygym.pa</a></li>
+        <li><a href="#">Lun-Vie: 5AM - 10PM</a></li>
+        <li><a href="#">Sab: 6AM - 8PM</a></li>
+        <li><a href="#">Dom: 7AM - 2PM</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>&copy; 2025 <span>Strong Body Gym</span>. Todos los derechos reservados.</p>
+    <p>La Chorrera, <span>Panama</span></p>
+  </div>
 </footer>
 
+<!-- ========== WHATSAPP BUTTON ========== -->
+<div class="wa-wrap">
+  <div class="wa-bubble" id="waBubble">
+    <button class="wa-close" onclick="closeBubble()" aria-label="Cerrar">&#x2715;</button>
+    <p><strong>Hola, bienvenido!</strong><br>Estamos disponibles para asesorarte.</p>
+    <small>Escribe para consultar sobre planes.</small>
+  </div>
+  <button class="wa-btn" onclick="chatWhatsApp('consulta general')" aria-label="Chat por WhatsApp">
+    <div class="wa-ring"></div>
+    <span class="wa-badge">Chat</span>
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z"/>
+    </svg>
+  </button>
+</div>
+
+<script>
+  // Navbar scroll
+  window.addEventListener('scroll', function () {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 40);
+  });
+
+  // Mobile menu
+  var mobileOpen = false;
+  document.getElementById('menuBtn').addEventListener('click', function () {
+    mobileOpen = !mobileOpen;
+    document.getElementById('mobileMenu').classList.toggle('open', mobileOpen);
+  });
+  function closeMenu() {
+    mobileOpen = false;
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  // Schedule tabs
+  function showTab(day, btn) {
+    document.querySelectorAll('.tab-pane').forEach(function (p) { p.classList.remove('active'); });
+    document.querySelectorAll('.tab').forEach(function (t) { t.classList.remove('active'); });
+    document.getElementById(day).classList.add('active');
+    btn.classList.add('active');
+  }
+
+  // WhatsApp
+  function chatWhatsApp(topic) {
+    var num = '50769999999'; // CAMBIA POR EL NUMERO REAL DEL GYM
+    var msg = 'Hola! Me interesa ' + topic + ' en Strong Body Gym. Me pueden dar informacion?';
+    window.open('https://wa.me/' + num + '?text=' + encodeURIComponent(msg), '_blank');
+  }
+
+  // WhatsApp bubble
+  setTimeout(function () {
+    document.getElementById('waBubble').classList.add('show');
+  }, 2500);
+  function closeBubble() {
+    document.getElementById('waBubble').classList.remove('show');
+  }
+
+  // Contact form
+  function submitForm(e) {
+    e.preventDefault();
+    document.getElementById('contactForm').style.display = 'none';
+    document.getElementById('formSuccess').classList.add('show');
+  }
+  function resetForm() {
+    document.getElementById('contactForm').reset();
+    document.getElementById('contactForm').style.display = '';
+    document.getElementById('formSuccess').classList.remove('show');
+  }
+
+  // Active nav link highlight on scroll
+  var allSections = document.querySelectorAll('section[id]');
+  var allNavLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', function () {
+    var pos = window.scrollY + 100;
+    allSections.forEach(function (s) {
+      if (pos >= s.offsetTop && pos < s.offsetTop + s.offsetHeight) {
+        allNavLinks.forEach(function (a) {
+          a.style.color = a.getAttribute('href') === '#' + s.id ? 'var(--orange)' : '';
+        });
+      }
+    });
+  });
+</script>
 </body>
 </html>
